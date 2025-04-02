@@ -97,4 +97,8 @@ public class BrickLayout {
             return false;
         }
     }
+
+    public int[][] getBrickLayout() {
+        return brickLayout;
+    }
 }
