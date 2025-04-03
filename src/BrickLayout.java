@@ -101,4 +101,54 @@ public class BrickLayout {
     public int[][] getBrickLayout() {
         return brickLayout;
     }
+
+    public void BrickFall()
+    {
+
+        for(int i = brickLayout.length - 1; i > 0; i--)
+        {
+
+            for(int b = 0;b < brickLayout[0].length;b++)
+            {
+
+                if((brickLayout[i][b] == 0) && (brickLayout[i - 1][b] == 1))
+                {
+
+                    int len = 0;
+                    for(int l = 0; (b + l < brickLayout[0].length)&&(brickLayout[i - 1][b + l] == 1); l++)
+                    {
+                        len++;
+                    }
+                    boolean isSpace = true;
+                    for(int l2 = 0; (l2 < len) && (isSpace); l2++ )
+                    {
+                        if (brickLayout[i][b + l2] != 0)
+                        {
+                            isSpace = false;
+                        }
+                    }
+                    if (isSpace)
+                    {
+
+                        System.out.println(len);
+                        for(int p = 0; p < len; p++)
+                        {
+                            brickLayout[i - 1][b + p] = 0;
+                            brickLayout[i][b + p] = 1;
+                        }
+                    }
+                    b += len;
+                }
+            }
+        }
+
+        if (bricks.size() != 0)
+        {
+            Brick b = bricks.remove(0);
+            for (int i = 0; i <= b.getEnd() - b.getStart(); i++)
+            {
+                brickLayout[0][b.getStart() + i] = 1;
+            }
+        }
+    }
 }
